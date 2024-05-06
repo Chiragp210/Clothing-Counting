@@ -48,77 +48,132 @@ class _HomePageState extends State<HomePage> {
     _coverController.clear();
   }
 
-  void delete(Cloths cloths) async{
+  void delete(Cloths cloths) async {
     await cloths.delete();
   }
-
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-        appBar: AppBar(
-        centerTitle: true,
+      appBar: AppBar(
+          centerTitle: true,
           title: const Text("Cloths Counting",
               style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.white,)),
+                fontSize: 30,
+                color: Colors.white,
+              )),
           backgroundColor: Colors.deepOrangeAccent,
           toolbarHeight: 90,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(60),
                   bottomRight: Radius.circular(60)))),
-        body: ValueListenableBuilder<Box<Cloths>>(
+      body: ValueListenableBuilder<Box<Cloths>>(
           valueListenable: Boxes.getData().listenable(),
-          builder: (context,box,_){
+          builder: (context, box, _) {
             var data = box.values.toList().cast<Cloths>();
             return ListView.builder(
-              itemCount: box.length,
+                itemCount: box.length,
                 reverse: true,
                 shrinkWrap: true,
-                itemBuilder: (context,index){
+                itemBuilder: (context, index) {
                   DateTime? date = data[index].date;
-                  String formattedDate = date != null ? DateFormat('dd-MM-yyyy').format(date) : 'No Date';
+                  String formattedDate = date != null
+                      ? DateFormat('dd-MM-yyyy').format(date)
+                      : 'No Date';
                   return Card(
                     margin: const EdgeInsets.all(20),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Date: $formattedDate',style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                            Text('Pants: ${data[index].pants}',style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                            Text('Shirts: ${data[index].shirts}',style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                            Text('Tshirts: ${data[index].tshirts}',style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                            Text('Shorts: ${data[index].shorts}',style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                            Text('Towel: ${data[index].towel}',style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                            Text('Tracks: ${data[index].tracks}',style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                            Text('Covers: ${data[index].covers}',style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                            Text('Total Cloths: ${data[index].total}',style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                IconButton(onPressed: (){
-                                    _editDialog(data[index], data[index].date as DateTime, data[index].pants as int, data[index].shirts as int, data[index].tshirts as int, data[index].shorts as int, data[index].towel as int, data[index].tracks as int, data[index].covers as int);
-                                },
-                                    icon: const Icon(Icons.update,color: Colors.orange,size: 35,)),
-                                IconButton(onPressed: (){
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Date: $formattedDate',
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Pants: ${data[index].pants}',
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Shirts: ${data[index].shirts}',
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Tshirts: ${data[index].tshirts}',
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Shorts: ${data[index].shorts}',
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Towel: ${data[index].towel}',
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Tracks: ${data[index].tracks}',
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Covers: ${data[index].covers}',
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Total Cloths: ${data[index].total}',
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    _editDialog(
+                                        data[index],
+                                        data[index].date as DateTime,
+                                        data[index].pants as int,
+                                        data[index].shirts as int,
+                                        data[index].tshirts as int,
+                                        data[index].shorts as int,
+                                        data[index].towel as int,
+                                        data[index].tracks as int,
+                                        data[index].covers as int);
+                                  },
+                                  icon: const Icon(
+                                    Icons.update,
+                                    color: Colors.orange,
+                                    size: 35,
+                                  )),
+                              IconButton(
+                                  onPressed: () {
                                     delete(data[index]);
-                                },
-                                    icon: const Icon(Icons.delete,color: Colors.red,size: 35,)),
-                              ],
-                            ),
-                          ],
-                        ),
+                                  },
+                                  icon: const Icon(
+                                    Icons.done_outline,
+                                    color: Colors.red,
+                                    size: 35,
+                                  )),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   );
-                }
-            );
-          }
-        ),
-        floatingActionButton: FloatingActionButton(
+                });
+          }),
+      floatingActionButton: FloatingActionButton(
         onPressed: () async {
           _addDialog();
         },
@@ -133,9 +188,8 @@ class _HomePageState extends State<HomePage> {
     ));
   }
 
-
-  Future<void> _editDialog(Cloths cloths, DateTime date,int pants,int shirts,int tshirts,int shorts,int towel,int tracks,int covers) async {
-
+  Future<void> _editDialog(Cloths cloths, DateTime date, int pants, int shirts,
+      int tshirts, int shorts, int towel, int tracks, int covers) async {
     _dateController.text = DateFormat('yyyy-MM-dd').format(date);
     _pantsController.text = pants.toString();
     _shirtsController.text = shirts.toString();
@@ -145,366 +199,6 @@ class _HomePageState extends State<HomePage> {
     _tracksController.text = tracks.toString();
     _coverController.text = covers.toString();
 
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return WillPopScope(
-            onWillPop: () async {
-              clearAll();
-              return true;
-            },
-            child: Dialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                elevation: 0.0,
-                backgroundColor: Colors.transparent,
-                child: SingleChildScrollView(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      padding: const EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            const Text(
-                              'Edit Clothes list',
-                              style: TextStyle(
-                                color: Colors.deepOrange,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 20.0),
-                            Form(
-                              key: _formKey,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  TextFormField(
-                                    controller: _dateController,
-                                    onTap: () async {
-                                      DateTime? pickedDate = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime.now(),
-                                        lastDate: DateTime.now()
-                                            .add(const Duration(days: 30)),
-                                      );
-                                      if (pickedDate != null) {
-                                        setState(() {
-                                          _dateController.text =
-                                              DateFormat('yyyy-MM-dd')
-                                                  .format(pickedDate);
-                                        });
-                                      }
-                                    },
-                                    decoration: InputDecoration(
-                                      labelText: 'Data',
-                                      hintText: 'Enter Date',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Please enter a date';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  const SizedBox(height: 20.0),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: TextFormField(
-                                          controller: _pantsController,
-                                          keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
-                                            labelText: "Pants",
-                                            hintText: "Enter Pants",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'Please Enter Pants';
-                                            } else {
-                                              final intInput = int.tryParse(value);
-                                              if (intInput == null ||
-                                                  intInput < 0 ||
-                                                  intInput > 14) {
-                                                return 'Please enter a value between 0 and 14';
-                                              }
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                      ),
-                                      const SizedBox(width: 10.0),
-                                      Expanded(
-                                        child: TextFormField(
-                                          controller: _shirtsController,
-                                          keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
-                                            labelText: "Shirts",
-                                            hintText: "Enter Shirts",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'Please Enter Shirts';
-                                            } else {
-                                              final intInput = int.tryParse(value);
-                                              if (intInput == null ||
-                                                  intInput < 0 ||
-                                                  intInput > 14) {
-                                                return 'Please enter a value between 0 and 14';
-                                              }
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 20.0),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: TextFormField(
-                                          controller: _tshirtsController,
-                                          keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
-                                            labelText: "T-shirt",
-                                            hintText: "Enter T-shirt",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'Please Enter T-shirt';
-                                            } else {
-                                              final intInput = int.tryParse(value);
-                                              if (intInput == null ||
-                                                  intInput < 0 ||
-                                                  intInput > 14) {
-                                                return 'Please enter a value between 0 and 14';
-                                              }
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                      ),
-                                      const SizedBox(width: 10.0),
-                                      Expanded(
-                                        child: TextFormField(
-                                          controller: _shortsController,
-                                          keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
-                                            labelText: "Shorts",
-                                            hintText: "Enter Shorts",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'Please Enter Shorts';
-                                            } else {
-                                              final intInput = int.tryParse(value);
-                                              if (intInput == null ||
-                                                  intInput < 0 ||
-                                                  intInput > 14) {
-                                                return 'Please enter a value between 0 and 14';
-                                              }
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 20.0),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: TextFormField(
-                                          controller: _towelController,
-                                          keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
-                                            labelText: "Towel",
-                                            hintText: "Enter Towel",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'Please Enter Towel';
-                                            } else {
-                                              final intInput = int.tryParse(value);
-                                              if (intInput == null ||
-                                                  intInput < 0 ||
-                                                  intInput > 14) {
-                                                return 'Please enter a value between 0 and 14';
-                                              }
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                      ),
-                                      const SizedBox(width: 10.0),
-                                      Expanded(
-                                        child: TextFormField(
-                                          controller: _coverController,
-                                          keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
-                                            labelText: "Covers",
-                                            hintText: "Enter Covers",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'Please Enter Covers';
-                                            } else {
-                                              final intInput = int.tryParse(value);
-                                              if (intInput == null ||
-                                                  intInput < 0 ||
-                                                  intInput > 14) {
-                                                return 'Please enter a value between 0 and 14';
-                                              }
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 20.0),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: TextFormField(
-                                          controller: _tracksController,
-                                          keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
-                                            labelText: "Tracks",
-                                            hintText: "Enter Tracks",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'Please Enter Tracks';
-                                            } else {
-                                              final intInput = int.tryParse(value);
-                                              if (intInput == null ||
-                                                  intInput < 0 ||
-                                                  intInput > 14) {
-                                                return 'Please enter a value between 0 and 14';
-                                              }
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                      ),
-                                      const SizedBox(width: 10.0),
-                                      const Expanded(child: Text("")),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 20.0),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                          clearAll();
-                                        },
-                                        child: const Text(
-                                          'Cancel',
-                                          style:
-                                          TextStyle(color: Colors.deepOrange),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 10.0),
-                                      TextButton(
-                                        onPressed: () {
-                                          if (_formKey.currentState!.validate()) {
-
-                                            int total = int.parse(_pantsController.text) +
-                                                int.parse(_shirtsController.text) +
-                                                int.parse(_tshirtsController.text) +
-                                                int.parse(_shortsController.text) +
-                                                int.parse(_towelController.text) +
-                                                int.parse(_tracksController.text) +
-                                                int.parse(_coverController.text);
-
-                                            cloths.date = DateTime.parse(_dateController.text);
-                                            cloths.pants = int.parse(_pantsController.text);
-                                            cloths.shirts = int.parse(_shirtsController.text);
-                                            cloths.tshirts = int.parse(_tshirtsController.text);
-                                            cloths.shorts = int.parse(_shortsController.text);
-                                            cloths.towel = int.parse(_towelController.text);
-                                            cloths.tracks = int.parse(_tracksController.text);
-                                            cloths.covers = int.parse(_coverController.text);
-                                            cloths.total = total;
-                                            
-
-                                            cloths.save();
-
-                                            Navigator.pop(context);
-                                            clearAll();
-                                          }
-                                        },
-                                        child: const Text(
-                                          'Edit',
-                                          style:
-                                          TextStyle(color: Colors.deepOrange),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ]),
-                    )
-                )
-            )
-        );
-      },
-    );
-  }
-
-
-  Future<void> _addDialog() async {
     return showDialog(
       context: context,
       builder: (context) {
@@ -531,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         const Text(
-                          'Add Clothes list',
+                          'Edit Clothes list',
                           style: TextStyle(
                             color: Colors.deepOrange,
                             fontSize: 20.0,
@@ -563,7 +257,7 @@ class _HomePageState extends State<HomePage> {
                                   }
                                 },
                                 decoration: InputDecoration(
-                                  labelText: 'Data',
+                                  labelText: 'Date',
                                   hintText: 'Enter Date',
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
@@ -582,9 +276,21 @@ class _HomePageState extends State<HomePage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    child: TextFormField(
-                                      controller: _pantsController,
-                                      keyboardType: TextInputType.number,
+                                    child: DropdownButtonFormField<int>(
+                                      value: 0, // Initially select 0
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          _pantsController.text =
+                                              newValue.toString();
+                                        });
+                                      },
+                                      items: List.generate(
+                                        15,
+                                        (index) => DropdownMenuItem<int>(
+                                          value: index,
+                                          child: Text(index.toString()),
+                                        ),
+                                      ),
                                       decoration: InputDecoration(
                                         labelText: "Pants",
                                         hintText: "Enter Pants",
@@ -594,15 +300,10 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter Pants';
-                                        } else {
-                                          final intInput = int.tryParse(value);
-                                          if (intInput == null ||
-                                              intInput < 0 ||
-                                              intInput > 14) {
-                                            return 'Please enter a value between 0 and 14';
-                                          }
+                                        if (value == null ||
+                                            value < 0 ||
+                                            value > 14) {
+                                          return 'Please select a value between 0 and 14';
                                         }
                                         return null;
                                       },
@@ -610,9 +311,21 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   const SizedBox(width: 10.0),
                                   Expanded(
-                                    child: TextFormField(
-                                      controller: _shirtsController,
-                                      keyboardType: TextInputType.number,
+                                    child: DropdownButtonFormField<int>(
+                                      value: 0, // Initially select 0
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          _shirtsController.text =
+                                              newValue.toString();
+                                        });
+                                      },
+                                      items: List.generate(
+                                        15,
+                                        (index) => DropdownMenuItem<int>(
+                                          value: index,
+                                          child: Text(index.toString()),
+                                        ),
+                                      ),
                                       decoration: InputDecoration(
                                         labelText: "Shirts",
                                         hintText: "Enter Shirts",
@@ -622,15 +335,10 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter Shirts';
-                                        } else {
-                                          final intInput = int.tryParse(value);
-                                          if (intInput == null ||
-                                              intInput < 0 ||
-                                              intInput > 14) {
-                                            return 'Please enter a value between 0 and 14';
-                                          }
+                                        if (value == null ||
+                                            value < 0 ||
+                                            value > 14) {
+                                          return 'Please select a value between 0 and 14';
                                         }
                                         return null;
                                       },
@@ -644,9 +352,21 @@ class _HomePageState extends State<HomePage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    child: TextFormField(
-                                      controller: _tshirtsController,
-                                      keyboardType: TextInputType.number,
+                                    child: DropdownButtonFormField<int>(
+                                      value: 0, // Initially select 0
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          _tshirtsController.text =
+                                              newValue.toString();
+                                        });
+                                      },
+                                      items: List.generate(
+                                        15,
+                                        (index) => DropdownMenuItem<int>(
+                                          value: index,
+                                          child: Text(index.toString()),
+                                        ),
+                                      ),
                                       decoration: InputDecoration(
                                         labelText: "T-shirt",
                                         hintText: "Enter T-shirt",
@@ -656,15 +376,10 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter T-shirt';
-                                        } else {
-                                          final intInput = int.tryParse(value);
-                                          if (intInput == null ||
-                                              intInput < 0 ||
-                                              intInput > 14) {
-                                            return 'Please enter a value between 0 and 14';
-                                          }
+                                        if (value == null ||
+                                            value < 0 ||
+                                            value > 14) {
+                                          return 'Please select a value between 0 and 14';
                                         }
                                         return null;
                                       },
@@ -672,9 +387,21 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   const SizedBox(width: 10.0),
                                   Expanded(
-                                    child: TextFormField(
-                                      controller: _shortsController,
-                                      keyboardType: TextInputType.number,
+                                    child: DropdownButtonFormField<int>(
+                                      value: 0, // Initially select 0
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          _shortsController.text =
+                                              newValue.toString();
+                                        });
+                                      },
+                                      items: List.generate(
+                                        15,
+                                        (index) => DropdownMenuItem<int>(
+                                          value: index,
+                                          child: Text(index.toString()),
+                                        ),
+                                      ),
                                       decoration: InputDecoration(
                                         labelText: "Shorts",
                                         hintText: "Enter Shorts",
@@ -684,15 +411,10 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter Shorts';
-                                        } else {
-                                          final intInput = int.tryParse(value);
-                                          if (intInput == null ||
-                                              intInput < 0 ||
-                                              intInput > 14) {
-                                            return 'Please enter a value between 0 and 14';
-                                          }
+                                        if (value == null ||
+                                            value < 0 ||
+                                            value > 14) {
+                                          return 'Please select a value between 0 and 14';
                                         }
                                         return null;
                                       },
@@ -706,9 +428,21 @@ class _HomePageState extends State<HomePage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    child: TextFormField(
-                                      controller: _towelController,
-                                      keyboardType: TextInputType.number,
+                                    child: DropdownButtonFormField<int>(
+                                      value: 0, // Initially select 0
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          _towelController.text =
+                                              newValue.toString();
+                                        });
+                                      },
+                                      items: List.generate(
+                                        3,
+                                        (index) => DropdownMenuItem<int>(
+                                          value: index,
+                                          child: Text(index.toString()),
+                                        ),
+                                      ),
                                       decoration: InputDecoration(
                                         labelText: "Towel",
                                         hintText: "Enter Towel",
@@ -718,15 +452,10 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter Towel';
-                                        } else {
-                                          final intInput = int.tryParse(value);
-                                          if (intInput == null ||
-                                              intInput < 0 ||
-                                              intInput > 14) {
-                                            return 'Please enter a value between 0 and 14';
-                                          }
+                                        if (value == null ||
+                                            value < 0 ||
+                                            value > 14) {
+                                          return 'Please select a value between 0 and 14';
                                         }
                                         return null;
                                       },
@@ -734,9 +463,21 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   const SizedBox(width: 10.0),
                                   Expanded(
-                                    child: TextFormField(
-                                      controller: _coverController,
-                                      keyboardType: TextInputType.number,
+                                    child: DropdownButtonFormField<int>(
+                                      value: 0, // Initially select 0
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          _coverController.text =
+                                              newValue.toString();
+                                        });
+                                      },
+                                      items: List.generate(
+                                        15,
+                                        (index) => DropdownMenuItem<int>(
+                                          value: index,
+                                          child: Text(index.toString()),
+                                        ),
+                                      ),
                                       decoration: InputDecoration(
                                         labelText: "Covers",
                                         hintText: "Enter Covers",
@@ -746,15 +487,10 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter Covers';
-                                        } else {
-                                          final intInput = int.tryParse(value);
-                                          if (intInput == null ||
-                                              intInput < 0 ||
-                                              intInput > 14) {
-                                            return 'Please enter a value between 0 and 14';
-                                          }
+                                        if (value == null ||
+                                            value < 0 ||
+                                            value > 14) {
+                                          return 'Please select a value between 0 and 14';
                                         }
                                         return null;
                                       },
@@ -765,7 +501,7 @@ class _HomePageState extends State<HomePage> {
                               const SizedBox(height: 20.0),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: TextFormField(
@@ -776,7 +512,7 @@ class _HomePageState extends State<HomePage> {
                                         hintText: "Enter Tracks",
                                         border: OutlineInputBorder(
                                           borderRadius:
-                                          BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                         ),
                                       ),
                                       validator: (value) {
@@ -817,35 +553,78 @@ class _HomePageState extends State<HomePage> {
                                   TextButton(
                                     onPressed: () {
                                       if (_formKey.currentState!.validate()) {
-                                        int total = int.parse(_pantsController.text) +
-                                            int.parse(_shirtsController.text) +
-                                            int.parse(_tshirtsController.text) +
-                                            int.parse(_shortsController.text) +
-                                            int.parse(_towelController.text) +
-                                            int.parse(_tracksController.text) +
-                                            int.parse(_coverController.text);
+                                        int pants1 =
+                                        _pantsController.text.isEmpty
+                                            ? 0
+                                            : int.parse(
+                                            _pantsController.text);
+                                        int shirt1 =
+                                        _shirtsController.text.isEmpty
+                                            ? 0
+                                            : int.parse(
+                                            _shirtsController.text);
+                                        int tshirts1 = _tshirtsController
+                                            .text.isEmpty
+                                            ? 0
+                                            : int.parse(
+                                            _tshirtsController.text);
+                                        int shorts1 =
+                                        _shortsController.text.isEmpty
+                                            ? 0
+                                            : int.parse(
+                                            _shortsController.text);
+                                        int towels1 =
+                                        _towelController.text.isEmpty
+                                            ? 0
+                                            : int.parse(
+                                            _towelController.text);
+                                        int tracks1 =
+                                        _tracksController.text.isEmpty
+                                            ? 0
+                                            : int.parse(
+                                            _tracksController.text);
+                                        int covers1 =
+                                        _coverController.text.isEmpty
+                                            ? 0
+                                            : int.parse(
+                                            _coverController.text);
 
-                                        final data = Cloths(date: DateTime.parse(_dateController.text),
-                                            pants: int.parse(_pantsController.text),
-                                            shirts: int.parse(_shirtsController.text),
-                                            tshirts: int.parse(_tshirtsController.text),
-                                            shorts: int.parse(_shortsController.text),
-                                            towel: int.parse(_towelController.text),
-                                            tracks: int.parse(_tracksController.text),
-                                            covers: int.parse(_coverController.text),
-                                            total: total);
+                                        int total = pants1 +
+                                            shirt1 +
+                                            tshirts1 +
+                                            shorts1 +
+                                            towels1 +
+                                            tracks1 +
+                                            covers1;
 
-                                        final box = Boxes.getData();
-                                        box.add(data);
 
-                                        data.save();
-                                        print(box);
+
+                                        cloths.date = DateTime.parse(
+                                            _dateController.text);
+                                        cloths.pants =
+                                            pants1;
+                                        cloths.shirts =
+                                            shirt1;
+                                        cloths.tshirts =
+                                            tshirts1;
+                                        cloths.shorts =
+                                            shorts1;
+                                        cloths.towel =
+                                            towels1;
+                                        cloths.tracks =
+                                            tracks1;
+                                        cloths.covers =
+                                            covers1;
+                                        cloths.total = total;
+
+                                        cloths.save();
+
                                         Navigator.pop(context);
                                         clearAll();
                                       }
                                     },
                                     child: const Text(
-                                      'Submit',
+                                      'Edit',
                                       style:
                                           TextStyle(color: Colors.deepOrange),
                                     ),
@@ -856,10 +635,451 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ]),
-                )
-                )
-            )
-        );
+                ))));
+      },
+    );
+  }
+
+  Future<void> _addDialog() async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return WillPopScope(
+            onWillPop: () async {
+              clearAll();
+              return true;
+            },
+            child: Dialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                elevation: 0.0,
+                backgroundColor: Colors.transparent,
+                child: SingleChildScrollView(
+                    child: Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  padding: const EdgeInsets.all(20.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const Text(
+                          'Add Clothes list',
+                          style: TextStyle(
+                            color: Colors.deepOrange,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 20.0),
+                        Form(
+                            key: _formKey,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  TextFormField(
+                                    controller: _dateController,
+                                    onTap: () async {
+                                      DateTime? pickedDate =
+                                          await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime.now(),
+                                        lastDate: DateTime.now()
+                                            .add(const Duration(days: 15)),
+                                      );
+                                      if (pickedDate != null) {
+                                        setState(() {
+                                          _dateController.text =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(pickedDate);
+                                        });
+                                      }
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: 'Date',
+                                      hintText: 'Enter Date',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Please enter a date';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  const SizedBox(height: 20.0),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: DropdownButtonFormField<int>(
+                                          value: 0, // Initially select 0
+                                          onChanged: (newValue) {
+                                            setState(() {
+                                              _pantsController.text =
+                                                  newValue.toString();
+                                            });
+                                          },
+                                          items: List.generate(
+                                            15,
+                                            (index) => DropdownMenuItem<int>(
+                                              value: index,
+                                              child: Text(index.toString()),
+                                            ),
+                                          ),
+                                          decoration: InputDecoration(
+                                            labelText: "Pants",
+                                            hintText: "Enter Pants",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value < 0 ||
+                                                value > 14) {
+                                              return 'Please select a value between 0 and 14';
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10.0),
+                                      Expanded(
+                                        child: DropdownButtonFormField<int>(
+                                          value: 0, // Initially select 0
+                                          onChanged: (newValue) {
+                                            setState(() {
+                                              _shirtsController.text =
+                                                  newValue.toString();
+                                            });
+                                          },
+                                          items: List.generate(
+                                            15,
+                                            (index) => DropdownMenuItem<int>(
+                                              value: index,
+                                              child: Text(index.toString()),
+                                            ),
+                                          ),
+                                          decoration: InputDecoration(
+                                            labelText: "Shirts",
+                                            hintText: "Enter Shirts",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value < 0 ||
+                                                value > 14) {
+                                              return 'Please select a value between 0 and 14';
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20.0),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: DropdownButtonFormField<int>(
+                                          value: 0, // Initially select 0
+                                          onChanged: (newValue) {
+                                            setState(() {
+                                              _tshirtsController.text =
+                                                  newValue.toString();
+                                            });
+                                          },
+                                          items: List.generate(
+                                            15,
+                                            (index) => DropdownMenuItem<int>(
+                                              value: index,
+                                              child: Text(index.toString()),
+                                            ),
+                                          ),
+                                          decoration: InputDecoration(
+                                            labelText: "T-Shirts",
+                                            hintText: "Enter T-Shirt",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value < 0 ||
+                                                value > 14) {
+                                              return 'Please select a value between 0 and 14';
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10.0),
+                                      Expanded(
+                                        child: DropdownButtonFormField<int>(
+                                          value: 0, // Initially select 0
+                                          onChanged: (newValue) {
+                                            setState(() {
+                                              _shortsController.text =
+                                                  newValue.toString();
+                                            });
+                                          },
+                                          items: List.generate(
+                                            15,
+                                            (index) => DropdownMenuItem<int>(
+                                              value: index,
+                                              child: Text(index.toString()),
+                                            ),
+                                          ),
+                                          decoration: InputDecoration(
+                                            labelText: "Shorts",
+                                            hintText: "Enter Shorts",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value < 0 ||
+                                                value > 14) {
+                                              return 'Please select a value between 0 and 14';
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20.0),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: DropdownButtonFormField<int>(
+                                          value: 0, // Initially select 0
+                                          onChanged: (newValue) {
+                                            setState(() {
+                                              _towelController.text =
+                                                  newValue.toString();
+                                            });
+                                          },
+                                          items: List.generate(
+                                            3,
+                                            (index) => DropdownMenuItem<int>(
+                                              value: index,
+                                              child: Text(index.toString()),
+                                            ),
+                                          ),
+                                          decoration: InputDecoration(
+                                            labelText: "Towels",
+                                            hintText: "Enter Towels",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value < 0 ||
+                                                value > 3) {
+                                              return 'Please select a value between 0 and 14';
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10.0),
+                                      Expanded(
+                                        child: DropdownButtonFormField<int>(
+                                          value: 0, // Initially select 0
+                                          onChanged: (newValue) {
+                                            setState(() {
+                                              _coverController.text =
+                                                  newValue.toString();
+                                            });
+                                          },
+                                          items: List.generate(
+                                            2,
+                                            (index) => DropdownMenuItem<int>(
+                                              value: index,
+                                              child: Text(index.toString()),
+                                            ),
+                                          ),
+                                          decoration: InputDecoration(
+                                            labelText: "Covers",
+                                            hintText: "Enter Covers",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value < 0 ||
+                                                value > 3) {
+                                              return 'Please select a value between 0 and 14';
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20.0),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: DropdownButtonFormField<int>(
+                                          value: 0, // Initially select 0
+                                          onChanged: (newValue) {
+                                            setState(() {
+                                              _tracksController.text =
+                                                  newValue.toString();
+                                            });
+                                          },
+                                          items: List.generate(
+                                            15,
+                                            (index) => DropdownMenuItem<int>(
+                                              value: index,
+                                              child: Text(index.toString()),
+                                            ),
+                                          ),
+                                          decoration: InputDecoration(
+                                            labelText: "Tracks",
+                                            hintText: "Enter Tracks",
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value < 0 ||
+                                                value > 14) {
+                                              return 'Please select a value between 0 and 14';
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10.0),
+                                      const Expanded(child: Text("")),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20.0),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          clearAll();
+                                        },
+                                        child: const Text(
+                                          'Cancel',
+                                          style: TextStyle(
+                                              color: Colors.deepOrange),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10.0),
+                                      TextButton(
+                                        onPressed: () {
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            int pants1 =
+                                                _pantsController.text.isEmpty
+                                                    ? 0
+                                                    : int.parse(
+                                                        _pantsController.text);
+                                            int shirt1 =
+                                                _shirtsController.text.isEmpty
+                                                    ? 0
+                                                    : int.parse(
+                                                        _shirtsController.text);
+                                            int tshirts1 = _tshirtsController
+                                                    .text.isEmpty
+                                                ? 0
+                                                : int.parse(
+                                                    _tshirtsController.text);
+                                            int shorts1 =
+                                                _shortsController.text.isEmpty
+                                                    ? 0
+                                                    : int.parse(
+                                                        _shortsController.text);
+                                            int towels1 =
+                                                _towelController.text.isEmpty
+                                                    ? 0
+                                                    : int.parse(
+                                                        _towelController.text);
+                                            int tracks1 =
+                                                _tracksController.text.isEmpty
+                                                    ? 0
+                                                    : int.parse(
+                                                        _tracksController.text);
+                                            int covers1 =
+                                                _coverController.text.isEmpty
+                                                    ? 0
+                                                    : int.parse(
+                                                        _coverController.text);
+
+                                            int total = pants1 +
+                                                shirt1 +
+                                                tshirts1 +
+                                                shorts1 +
+                                                towels1 +
+                                                tracks1 +
+                                                covers1;
+
+                                            final data = Cloths(
+                                                date: DateTime.parse(
+                                                    _dateController.text),
+                                                pants: pants1,
+                                                shirts: shirt1,
+                                                tshirts: tshirts1,
+                                                shorts: shorts1,
+                                                towel: towels1,
+                                                tracks: tracks1,
+                                                covers: covers1,
+                                                total: total);
+
+                                            final box = Boxes.getData();
+                                            box.add(data);
+
+                                            data.save();
+                                            print(box);
+                                            Navigator.pop(context);
+                                            clearAll();
+                                          }
+                                        },
+                                        child: const Text(
+                                          'Submit',
+                                          style: TextStyle(
+                                              color: Colors.deepOrange),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ]))
+                      ]),
+                ))));
       },
     );
   }
