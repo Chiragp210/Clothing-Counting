@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                                         data[index].covers as int);
                                   },
                                   icon: const Icon(
-                                    Icons.update,
+                                    Icons.note_alt_outlined,
                                     color: Colors.orange,
                                     size: 35,
                                   )),
@@ -161,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                                     delete(data[index]);
                                   },
                                   icon: const Icon(
-                                    Icons.done_outline,
+                                    Icons.done_all,
                                     color: Colors.red,
                                     size: 35,
                                   )),
