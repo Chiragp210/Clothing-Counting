@@ -158,7 +158,30 @@ class _HomePageState extends State<HomePage> {
                                   )),
                               IconButton(
                                   onPressed: () {
-                                    delete(data[index]);
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text('Confirm Delete'),
+                                          content: Text('Are you sure you want to delete this item?'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop(); // Close the dialog
+                                              },
+                                              child: Text('Cancel'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                delete(data[index]); // Call the delete function if confirmed
+                                                Navigator.of(context).pop(); // Close the dialog
+                                              },
+                                              child: Text('Delete'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
                                   },
                                   icon: const Icon(
                                     Icons.done_all,
@@ -277,7 +300,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Expanded(
                                     child: DropdownButtonFormField<int>(
-                                      value: 0, // Initially select 0
+                                      value: _pantsController.text, // Initially select 0
                                       onChanged: (newValue) {
                                         setState(() {
                                           _pantsController.text =
@@ -312,7 +335,7 @@ class _HomePageState extends State<HomePage> {
                                   const SizedBox(width: 10.0),
                                   Expanded(
                                     child: DropdownButtonFormField<int>(
-                                      value: 0, // Initially select 0
+                                      value: _shirtsController.text, // Initially select 0
                                       onChanged: (newValue) {
                                         setState(() {
                                           _shirtsController.text =
@@ -353,7 +376,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Expanded(
                                     child: DropdownButtonFormField<int>(
-                                      value: 0, // Initially select 0
+                                      value: _tshirtsController.text, // Initially select 0
                                       onChanged: (newValue) {
                                         setState(() {
                                           _tshirtsController.text =
@@ -388,7 +411,7 @@ class _HomePageState extends State<HomePage> {
                                   const SizedBox(width: 10.0),
                                   Expanded(
                                     child: DropdownButtonFormField<int>(
-                                      value: 0, // Initially select 0
+                                      value: _shortsController.text, // Initially select 0
                                       onChanged: (newValue) {
                                         setState(() {
                                           _shortsController.text =
@@ -429,7 +452,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Expanded(
                                     child: DropdownButtonFormField<int>(
-                                      value: 0, // Initially select 0
+                                      value: _towelController.text, // Initially select 0
                                       onChanged: (newValue) {
                                         setState(() {
                                           _towelController.text =
@@ -464,7 +487,7 @@ class _HomePageState extends State<HomePage> {
                                   const SizedBox(width: 10.0),
                                   Expanded(
                                     child: DropdownButtonFormField<int>(
-                                      value: 0, // Initially select 0
+                                      value: _coverController.text, // Initially select 0
                                       onChanged: (newValue) {
                                         setState(() {
                                           _coverController.text =
@@ -472,7 +495,7 @@ class _HomePageState extends State<HomePage> {
                                         });
                                       },
                                       items: List.generate(
-                                        15,
+                                        3,
                                         (index) => DropdownMenuItem<int>(
                                           value: index,
                                           child: Text(index.toString()),
@@ -489,7 +512,7 @@ class _HomePageState extends State<HomePage> {
                                       validator: (value) {
                                         if (value == null ||
                                             value < 0 ||
-                                            value > 14) {
+                                            value > 3) {
                                           return 'Please select a value between 0 and 14';
                                         }
                                         return null;
@@ -504,32 +527,41 @@ class _HomePageState extends State<HomePage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    child: TextFormField(
-                                      controller: _tracksController,
-                                      keyboardType: TextInputType.number,
+                                    child: DropdownButtonFormField<int>(
+                                      value: _tracksController.text, // Initially select 0
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          _tracksController.text =
+                                              newValue.toString();
+                                        });
+                                      },
+                                      items: List.generate(
+                                        15,
+                                            (index) => DropdownMenuItem<int>(
+                                          value: index,
+                                          child: Text(index.toString()),
+                                        ),
+                                      ),
                                       decoration: InputDecoration(
                                         labelText: "Tracks",
                                         hintText: "Enter Tracks",
                                         border: OutlineInputBorder(
                                           borderRadius:
-                                              BorderRadius.circular(10),
+                                          BorderRadius.circular(10),
                                         ),
                                       ),
                                       validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Please Enter Tracks';
-                                        } else {
-                                          final intInput = int.tryParse(value);
-                                          if (intInput == null ||
-                                              intInput < 0 ||
-                                              intInput > 14) {
-                                            return 'Please enter a value between 0 and 14';
-                                          }
+                                        if (value == null ||
+                                            value < 0 ||
+                                            value > 14) {
+                                          return 'Please select a value between 0 and 14';
                                         }
                                         return null;
                                       },
                                     ),
                                   ),
+                                ],
+                              ),
                                   const SizedBox(width: 10.0),
                                   const Expanded(child: Text("")),
                                 ],
