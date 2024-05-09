@@ -300,7 +300,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Expanded(
                                     child: DropdownButtonFormField<int>(
-                                      value: _pantsController.text, // Initially select 0
+                                      value: int.parse(_pantsController.text), // Initially select 0
                                       onChanged: (newValue) {
                                         setState(() {
                                           _pantsController.text =
@@ -335,7 +335,7 @@ class _HomePageState extends State<HomePage> {
                                   const SizedBox(width: 10.0),
                                   Expanded(
                                     child: DropdownButtonFormField<int>(
-                                      value: _shirtsController.text, // Initially select 0
+                                      value: int.parse(_shirtsController.text), // Initially select 0
                                       onChanged: (newValue) {
                                         setState(() {
                                           _shirtsController.text =
@@ -376,7 +376,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Expanded(
                                     child: DropdownButtonFormField<int>(
-                                      value: _tshirtsController.text, // Initially select 0
+                                      value: int.parse(_tshirtsController.text), // Initially select 0
                                       onChanged: (newValue) {
                                         setState(() {
                                           _tshirtsController.text =
@@ -411,7 +411,7 @@ class _HomePageState extends State<HomePage> {
                                   const SizedBox(width: 10.0),
                                   Expanded(
                                     child: DropdownButtonFormField<int>(
-                                      value: _shortsController.text, // Initially select 0
+                                      value: int.parse(_shortsController.text), // Initially select 0
                                       onChanged: (newValue) {
                                         setState(() {
                                           _shortsController.text =
@@ -452,7 +452,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Expanded(
                                     child: DropdownButtonFormField<int>(
-                                      value: _towelController.text, // Initially select 0
+                                      value: int.parse(_towelController.text), // Initially select 0
                                       onChanged: (newValue) {
                                         setState(() {
                                           _towelController.text =
@@ -487,7 +487,7 @@ class _HomePageState extends State<HomePage> {
                                   const SizedBox(width: 10.0),
                                   Expanded(
                                     child: DropdownButtonFormField<int>(
-                                      value: _coverController.text, // Initially select 0
+                                      value: int.parse(_coverController.text), // Initially select 0
                                       onChanged: (newValue) {
                                         setState(() {
                                           _coverController.text =
@@ -528,7 +528,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Expanded(
                                     child: DropdownButtonFormField<int>(
-                                      value: _tracksController.text, // Initially select 0
+                                      value: int.parse(_tracksController.text), // Initially select 0
                                       onChanged: (newValue) {
                                         setState(() {
                                           _tracksController.text =
@@ -560,9 +560,7 @@ class _HomePageState extends State<HomePage> {
                                       },
                                     ),
                                   ),
-                                ],
-                              ),
-                                  const SizedBox(width: 10.0),
+                                const SizedBox(width: 10.0),
                                   const Expanded(child: Text("")),
                                 ],
                               ),
@@ -667,7 +665,8 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ]),
-                ))));
+                ))
+        ),);
       },
     );
   }
@@ -947,7 +946,7 @@ class _HomePageState extends State<HomePage> {
                                             });
                                           },
                                           items: List.generate(
-                                            2,
+                                            3,
                                             (index) => DropdownMenuItem<int>(
                                               value: index,
                                               child: Text(index.toString()),
@@ -965,7 +964,7 @@ class _HomePageState extends State<HomePage> {
                                             if (value == null ||
                                                 value < 0 ||
                                                 value > 3) {
-                                              return 'Please select a value between 0 and 14';
+                                              return 'Please select a value between 0 and 3';
                                             }
                                             return null;
                                           },
