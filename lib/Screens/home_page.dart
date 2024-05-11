@@ -18,8 +18,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
   void delete(Cloths cloths) async {
     await cloths.delete();
   }
@@ -47,7 +45,7 @@ class _HomePageState extends State<HomePage> {
             var data = box.values.toList().cast<Cloths>();
             return ListView.builder(
                 itemCount: box.length,
-                reverse: true,
+                // reverse: true,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   DateTime? date = data[index].date;
@@ -133,8 +131,32 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                             TextButton(
                                               onPressed: () {
-                                                delete(data[
-                                                    index]); // Call the delete function if confirmed
+                                                delete(data[index]);
+                                                const snackBar = SnackBar(
+                                                  content: Text(
+                                                    'Your request was successfully deleted',
+                                                    style:
+                                                        TextStyle(fontSize: 16),
+                                                  ),
+                                                  backgroundColor: Colors.red,
+                                                  padding: EdgeInsets.all(16.0),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                20)),
+                                                  ),
+                                                  behavior:
+                                                      SnackBarBehavior.floating,
+                                                  duration:
+                                                      Duration(seconds: 5),
+                                                  dismissDirection:
+                                                      DismissDirection.horizontal,
+                                                );
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  snackBar,
+                                                ); // Call the delete function if confirmed
                                                 Navigator.of(context)
                                                     .pop(); // Close the dialog
                                               },

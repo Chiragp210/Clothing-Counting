@@ -29,7 +29,6 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
 
   final _coverController = TextEditingController();
 
-
   void clearAll() {
     _dateController.clear();
     _pantsController.clear();
@@ -78,19 +77,17 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                           controller: _dateController,
                           readOnly: true,
                           onTap: () async {
-                            DateTime? pickedDate =
-                            await showDatePicker(
+                            DateTime? pickedDate = await showDatePicker(
                               context: context,
                               initialDate: DateTime.now(),
                               firstDate: DateTime.now(),
-                              lastDate: DateTime.now()
-                                  .add(const Duration(days: 7)),
+                              lastDate:
+                                  DateTime.now().add(const Duration(days: 7)),
                             );
                             if (pickedDate != null) {
                               setState(() {
                                 _dateController.text =
-                                    DateFormat('yyyy-MM-dd')
-                                        .format(pickedDate);
+                                    DateFormat('yyyy-MM-dd').format(pickedDate);
                               });
                             }
                           },
@@ -110,8 +107,7 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                         ),
                         const SizedBox(height: 20.0),
                         Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomDropdown(
                               labelText: "Pants",
@@ -124,7 +120,7 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                               value: 0, // Initially select 0
                               items: List.generate(
                                 15,
-                                    (index) => DropdownMenuItem<int>(
+                                (index) => DropdownMenuItem<int>(
                                   value: index,
                                   child: Text(index.toString()),
                                 ),
@@ -142,7 +138,7 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                               value: 0, // Initially select 0
                               items: List.generate(
                                 15,
-                                    (index) => DropdownMenuItem<int>(
+                                (index) => DropdownMenuItem<int>(
                                   value: index,
                                   child: Text(index.toString()),
                                 ),
@@ -152,8 +148,7 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                         ),
                         const SizedBox(height: 20.0),
                         Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomDropdown(
                               labelText: "T-Shirts",
@@ -166,7 +161,7 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                               value: 0, // Initially select 0
                               items: List.generate(
                                 15,
-                                    (index) => DropdownMenuItem<int>(
+                                (index) => DropdownMenuItem<int>(
                                   value: index,
                                   child: Text(index.toString()),
                                 ),
@@ -184,7 +179,7 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                               value: 0, // Initially select 0
                               items: List.generate(
                                 15,
-                                    (index) => DropdownMenuItem<int>(
+                                (index) => DropdownMenuItem<int>(
                                   value: index,
                                   child: Text(index.toString()),
                                 ),
@@ -194,8 +189,7 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                         ),
                         const SizedBox(height: 20.0),
                         Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomDropdown(
                               labelText: "Towels",
@@ -208,7 +202,7 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                               value: 0, // Initially select 0
                               items: List.generate(
                                 3,
-                                    (index) => DropdownMenuItem<int>(
+                                (index) => DropdownMenuItem<int>(
                                   value: index,
                                   child: Text(index.toString()),
                                 ),
@@ -226,7 +220,7 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                               value: 0, // Initially select 0
                               items: List.generate(
                                 3,
-                                    (index) => DropdownMenuItem<int>(
+                                (index) => DropdownMenuItem<int>(
                                   value: index,
                                   child: Text(index.toString()),
                                 ),
@@ -236,8 +230,7 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                         ),
                         const SizedBox(height: 20.0),
                         Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomDropdown(
                               labelText: "Tracks",
@@ -250,7 +243,7 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                               value: 0, // Initially select 0
                               items: List.generate(
                                 15,
-                                    (index) => DropdownMenuItem<int>(
+                                (index) => DropdownMenuItem<int>(
                                   value: index,
                                   child: Text(index.toString()),
                                 ),
@@ -271,50 +264,34 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                               },
                               child: const Text(
                                 'Cancel',
-                                style: TextStyle(
-                                    color: Colors.deepOrange),
+                                style: TextStyle(color: Colors.deepOrange),
                               ),
                             ),
                             const SizedBox(width: 10.0),
                             TextButton(
                               onPressed: () {
-                                if (_formKey.currentState!
-                                    .validate()) {
-                                  int pants1 =
-                                  _pantsController.text.isEmpty
+                                if (_formKey.currentState!.validate()) {
+                                  int pants1 = _pantsController.text.isEmpty
                                       ? 0
-                                      : int.parse(
-                                      _pantsController.text);
-                                  int shirt1 =
-                                  _shirtsController.text.isEmpty
+                                      : int.parse(_pantsController.text);
+                                  int shirt1 = _shirtsController.text.isEmpty
                                       ? 0
-                                      : int.parse(
-                                      _shirtsController.text);
-                                  int tshirts1 = _tshirtsController
-                                      .text.isEmpty
+                                      : int.parse(_shirtsController.text);
+                                  int tshirts1 = _tshirtsController.text.isEmpty
                                       ? 0
-                                      : int.parse(
-                                      _tshirtsController.text);
-                                  int shorts1 =
-                                  _shortsController.text.isEmpty
+                                      : int.parse(_tshirtsController.text);
+                                  int shorts1 = _shortsController.text.isEmpty
                                       ? 0
-                                      : int.parse(
-                                      _shortsController.text);
-                                  int towels1 =
-                                  _towelController.text.isEmpty
+                                      : int.parse(_shortsController.text);
+                                  int towels1 = _towelController.text.isEmpty
                                       ? 0
-                                      : int.parse(
-                                      _towelController.text);
-                                  int tracks1 =
-                                  _tracksController.text.isEmpty
+                                      : int.parse(_towelController.text);
+                                  int tracks1 = _tracksController.text.isEmpty
                                       ? 0
-                                      : int.parse(
-                                      _tracksController.text);
-                                  int covers1 =
-                                  _coverController.text.isEmpty
+                                      : int.parse(_tracksController.text);
+                                  int covers1 = _coverController.text.isEmpty
                                       ? 0
-                                      : int.parse(
-                                      _coverController.text);
+                                      : int.parse(_coverController.text);
 
                                   int total = pants1 +
                                       shirt1 +
@@ -325,8 +302,8 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                                       covers1;
 
                                   final data = Cloths(
-                                      date: DateTime.parse(
-                                          _dateController.text),
+                                      date:
+                                          DateTime.parse(_dateController.text),
                                       pants: pants1,
                                       shirts: shirt1,
                                       tshirts: tshirts1,
@@ -343,12 +320,31 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                                   print(box);
                                   Navigator.pop(context);
                                   clearAll();
+
+                                  const snackBar = SnackBar(
+                                    content: Text(
+                                        'Your request was successfully added',
+                                        style: TextStyle(fontSize: 16)),
+                                    backgroundColor: Colors.green,
+                                    elevation: 5.0,
+                                    padding: EdgeInsets.all(16.0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(20)),
+                                    ),
+                                    behavior: SnackBarBehavior.floating,
+                                    duration: Duration(seconds: 5),
+                                    dismissDirection:
+                                        DismissDirection.horizontal,
+                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    snackBar,
+                                  );
                                 }
                               },
                               child: const Text(
                                 'Submit',
-                                style: TextStyle(
-                                    color: Colors.deepOrange),
+                                style: TextStyle(color: Colors.deepOrange),
                               ),
                             ),
                           ],

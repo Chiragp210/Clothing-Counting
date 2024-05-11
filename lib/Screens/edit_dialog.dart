@@ -292,6 +292,24 @@ class _EditClothesDialogState extends State<EditClothesDialog> {
 
                               Navigator.pop(context);
                               clearAll();
+                              const snackBar = SnackBar(
+                                content: Text(
+                                    'Your request was successfully updated',
+                                    style: TextStyle(fontSize: 16)),
+                                backgroundColor: Colors.deepOrangeAccent,
+                                elevation: 5.0,
+                                padding: EdgeInsets.all(16.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                                duration: Duration(seconds: 5),
+                                dismissDirection: DismissDirection.horizontal,
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                snackBar,
+                              );
                             }
                           },
                           child: const Text(
