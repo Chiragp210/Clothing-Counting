@@ -270,40 +270,40 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                             const SizedBox(width: 10.0),
                             TextButton(
                               onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  int pants1 = _pantsController.text.isEmpty
-                                      ? 0
-                                      : int.parse(_pantsController.text);
-                                  int shirt1 = _shirtsController.text.isEmpty
-                                      ? 0
-                                      : int.parse(_shirtsController.text);
-                                  int tshirts1 = _tshirtsController.text.isEmpty
-                                      ? 0
-                                      : int.parse(_tshirtsController.text);
-                                  int shorts1 = _shortsController.text.isEmpty
-                                      ? 0
-                                      : int.parse(_shortsController.text);
-                                  int towels1 = _towelController.text.isEmpty
-                                      ? 0
-                                      : int.parse(_towelController.text);
-                                  int tracks1 = _tracksController.text.isEmpty
-                                      ? 0
-                                      : int.parse(_tracksController.text);
-                                  int covers1 = _coverController.text.isEmpty
-                                      ? 0
-                                      : int.parse(_coverController.text);
+                                try {
+                                  if (_formKey.currentState!.validate()) {
+                                    int pants1 = _pantsController.text.isEmpty
+                                        ? 0
+                                        : int.parse(_pantsController.text);
+                                    int shirt1 = _shirtsController.text.isEmpty
+                                        ? 0
+                                        : int.parse(_shirtsController.text);
+                                    int tshirts1 = _tshirtsController.text.isEmpty
+                                        ? 0
+                                        : int.parse(_tshirtsController.text);
+                                    int shorts1 = _shortsController.text.isEmpty
+                                        ? 0
+                                        : int.parse(_shortsController.text);
+                                    int towels1 = _towelController.text.isEmpty
+                                        ? 0
+                                        : int.parse(_towelController.text);
+                                    int tracks1 = _tracksController.text.isEmpty
+                                        ? 0
+                                        : int.parse(_tracksController.text);
+                                    int covers1 = _coverController.text.isEmpty
+                                        ? 0
+                                        : int.parse(_coverController.text);
 
-                                  int total = pants1 +
-                                      shirt1 +
-                                      tshirts1 +
-                                      shorts1 +
-                                      towels1 +
-                                      tracks1 +
-                                      covers1;
+                                    int total = pants1 +
+                                        shirt1 +
+                                        tshirts1 +
+                                        shorts1 +
+                                        towels1 +
+                                        tracks1 +
+                                        covers1;
 
-                                  final data = Cloths(
-                                      date:
-                                          DateTime.parse(_dateController.text),
+                                    final data = Cloths(
+                                      date: DateTime.parse(_dateController.text),
                                       pants: pants1,
                                       shirts: shirt1,
                                       tshirts: tshirts1,
@@ -311,35 +311,39 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                                       towel: towels1,
                                       tracks: tracks1,
                                       covers: covers1,
-                                      total: total);
+                                      total: total,
+                                    );
 
-                                  final box = Boxes.getData();
-                                  box.add(data);
+                                    final box = Boxes.getData();
+                                    box.add(data);
 
-                                  data.save();
-                                  print(box);
-                                  Navigator.pop(context);
-                                  clearAll();
+                                    data.save();
+                                    print(box);
+                                    Navigator.pop(context);
+                                    clearAll();
 
-                                  const snackBar = SnackBar(
-                                    content: Text(
+                                    const snackBar = SnackBar(
+                                      content: Text(
                                         'Your request was successfully added',
-                                        style: TextStyle(fontSize: 16)),
-                                    backgroundColor: Colors.green,
-                                    elevation: 5.0,
-                                    padding: EdgeInsets.all(16.0),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(20)),
-                                    ),
-                                    behavior: SnackBarBehavior.floating,
-                                    duration: Duration(seconds: 5),
-                                    dismissDirection:
-                                        DismissDirection.horizontal,
-                                  );
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    snackBar,
-                                  );
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      backgroundColor: Colors.green,
+                                      elevation: 5.0,
+                                      padding: EdgeInsets.all(16.0),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                                      ),
+                                      behavior: SnackBarBehavior.floating,
+                                      duration: Duration(seconds: 5),
+                                      dismissDirection: DismissDirection.horizontal,
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      snackBar,
+                                    );
+                                  }
+                                } catch (e) {
+                                  print("Error adding clothes: $e");
+                                  // Handle the error here, for example, show an error message to the user.
                                 }
                               },
                               child: const Text(
@@ -347,6 +351,7 @@ class _AddClothesDialogState extends State<AddClothesDialog> {
                                 style: TextStyle(color: Colors.deepOrange),
                               ),
                             ),
+
                           ],
                         ),
                       ]))

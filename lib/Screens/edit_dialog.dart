@@ -330,33 +330,38 @@ class _EditClothesDialogState extends State<EditClothesDialog> {
   }
 
   void updateClothValues() {
-    int pants1 =
-        _pantsController.text.isEmpty ? 0 : int.parse(_pantsController.text);
-    int shirt1 =
-        _shirtsController.text.isEmpty ? 0 : int.parse(_shirtsController.text);
-    int tshirts1 = _tshirtsController.text.isEmpty
-        ? 0
-        : int.parse(_tshirtsController.text);
-    int shorts1 =
-        _shortsController.text.isEmpty ? 0 : int.parse(_shortsController.text);
-    int towels1 =
-        _towelController.text.isEmpty ? 0 : int.parse(_towelController.text);
-    int tracks1 =
-        _tracksController.text.isEmpty ? 0 : int.parse(_tracksController.text);
-    int covers1 =
-        _coverController.text.isEmpty ? 0 : int.parse(_coverController.text);
+    try {
+      int pants1 =
+      _pantsController.text.isEmpty ? 0 : int.parse(_pantsController.text);
+      int shirt1 =
+      _shirtsController.text.isEmpty ? 0 : int.parse(_shirtsController.text);
+      int tshirts1 = _tshirtsController.text.isEmpty
+          ? 0
+          : int.parse(_tshirtsController.text);
+      int shorts1 =
+      _shortsController.text.isEmpty ? 0 : int.parse(_shortsController.text);
+      int towels1 =
+      _towelController.text.isEmpty ? 0 : int.parse(_towelController.text);
+      int tracks1 =
+      _tracksController.text.isEmpty ? 0 : int.parse(_tracksController.text);
+      int covers1 =
+      _coverController.text.isEmpty ? 0 : int.parse(_coverController.text);
 
-    int total =
-        pants1 + shirt1 + tshirts1 + shorts1 + towels1 + tracks1 + covers1;
+      int total =
+          pants1 + shirt1 + tshirts1 + shorts1 + towels1 + tracks1 + covers1;
 
-    widget.cloths.date = DateTime.parse(_dateController.text);
-    widget.cloths.pants = pants1;
-    widget.cloths.shirts = shirt1;
-    widget.cloths.tshirts = tshirts1;
-    widget.cloths.shorts = shorts1;
-    widget.cloths.towel = towels1;
-    widget.cloths.tracks = tracks1;
-    widget.cloths.covers = covers1;
-    widget.cloths.total = total;
+      widget.cloths.date = DateTime.parse(_dateController.text);
+      widget.cloths.pants = pants1;
+      widget.cloths.shirts = shirt1;
+      widget.cloths.tshirts = tshirts1;
+      widget.cloths.shorts = shorts1;
+      widget.cloths.towel = towels1;
+      widget.cloths.tracks = tracks1;
+      widget.cloths.covers = covers1;
+      widget.cloths.total = total;
+    } catch (e) {
+      print("Error updating cloth values: $e");
+      // You might want to handle this error accordingly, e.g., show an error message to the user.
+    }
   }
 }
