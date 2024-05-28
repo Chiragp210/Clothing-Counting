@@ -95,7 +95,34 @@ class _HomePageState extends State<HomePage> {
                           title: 'Pants',
                           value: data[index].pants.toString(),
                         ),
-                        // Add other ClothesItemWidget here
+                        ClothesItemWidget(
+                          title: 'Shorts',
+                          value: data[index].shirts.toString(),
+                        ),
+                        ClothesItemWidget(
+                          title: 'T-Shirts',
+                          value: data[index].tshirts.toString(),
+                        ),
+                        ClothesItemWidget(
+                          title: 'Shorts',
+                          value: data[index].shorts.toString(),
+                        ),
+                        ClothesItemWidget(
+                          title: 'Towel',
+                          value: data[index].towel.toString(),
+                        ),
+                        ClothesItemWidget(
+                          title: 'Tracks',
+                          value: data[index].tracks.toString(),
+                        ),
+                        ClothesItemWidget(
+                          title: 'Covers',
+                          value: data[index].covers.toString(),
+                        ),
+                        ClothesItemWidget(
+                          title: 'Total Cloths',
+                          value: data[index].total.toString(),
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
