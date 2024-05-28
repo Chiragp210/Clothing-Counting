@@ -103,6 +103,7 @@ class _HomePageState extends State<HomePage> {
                                   onPressed: () {
                                     showDialog(
                                       context: context,
+                                      barrierDismissible: false,
                                       builder: (context) => EditClothesDialog(
                                           cloths: data[index]),
                                     );
@@ -184,6 +185,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () async {
           showDialog(
             context: context,
+            barrierDismissible: false,
             builder: (context) => AddClothesDialog(),
           );
         },
