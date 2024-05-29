@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                           value: data[index].shorts.toString(),
                         ),
                         ClothesItemWidget(
-                          title: 'Towel',
+                          title: 'Towels',
                           value: data[index].towel.toString(),
                         ),
                         ClothesItemWidget(
